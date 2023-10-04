@@ -27,8 +27,8 @@ modules:
   - name: webkit2gtk-4.0
     sources:
       - type: archive
-        url: https://webkitgtk.org/releases/webkitgtk-2.42.0.tar.xz
-        sha256: 828f95935861fae583fb8f2ae58cf64c63c178ae2b7c2d6f73070813ad64ed1b
+        url: https://webkitgtk.org/releases/webkitgtk-2.42.1.tar.xz
+        sha256: 6f41fac9989d3ee51c08c48de1d439cdeddecbc757e34b6180987d99b16d2499
         x-checker-data:
           type: html
           url: https://webkitgtk.org/releases/
@@ -55,7 +55,7 @@ modules:
         npm_config_offline: 'true'
         npm_config_cache: /run/build/lonewolf/flatpak-node/npm-cache
         npm_config_nodedir: /usr/lib/sdk/node18
-        CYPRESS_INSTALL_BINARY: "0"
+        CYPRESS_INSTALL_BINARY: '0'
     sources:
       - type: git
         url: https://github.com/aichingm/lonewolf.git
@@ -66,14 +66,19 @@ modules:
     build-commands:
       # install deps
       - (cd lonewolf-tauri; npm ci --no-audit --offline --cache=/run/build/lonewolf/flatpak-node/npm-cache)
-      - (cd lonewolf-tauri; cargo --offline fetch --manifest-path src-tauri/Cargo.toml --verbose)
+      - (cd lonewolf-tauri; cargo --offline fetch --manifest-path src-tauri/Cargo.toml
+        --verbose)
       # build images
-      - (cd lonewolf-tauri; rsvg-convert -b "#ffffff00" src/assets/lonewolf.svg --width=512 --height=512 --output public/lonewolf.png)
-      - (cd lonewolf-tauri; rsvg-convert -b "#ffffff00" src/assets/icon.svg --width=128 --height=128 --output public/icon.png)
+      - (cd lonewolf-tauri; rsvg-convert -b "#ffffff00" src/assets/lonewolf.svg --width=512
+        --height=512 --output public/lonewolf.png)
+      - (cd lonewolf-tauri; rsvg-convert -b "#ffffff00" src/assets/icon.svg --width=128
+        --height=128 --output public/icon.png)
       # build tauri images
       - (cd lonewolf-tauri; mkdir -p src-tauri/icons)
-      - (cd lonewolf-tauri; rsvg-convert -b "#ffffff00" src/assets/icon.svg --width=512 --height=512 --output src-tauri/icons/512x512-lonewolf.png)
-      - (cd lonewolf-tauri; npm run tauri icon -- src-tauri/icons/512x512-lonewolf.png -o src-tauri/icons)
+      - (cd lonewolf-tauri; rsvg-convert -b "#ffffff00" src/assets/icon.svg --width=512
+        --height=512 --output src-tauri/icons/512x512-lonewolf.png)
+      - (cd lonewolf-tauri; npm run tauri icon -- src-tauri/icons/512x512-lonewolf.png
+        -o src-tauri/icons)
       # build
       - (cd lonewolf-tauri; npm run --offline tauri build -- -b deb)
       # install
