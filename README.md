@@ -2,10 +2,6 @@
 
 Flatpak for [github.com/aichingm/Lonewolf](github.com/aichingm/Lonewolf)
 
-## Ideas for optimization
-
-* [ ] Move to gnome 44 before tauri switches to webkitgtk version: https://github.com/flathub/io.github.vemonet.EmojiMart/blob/master/io.github.vemonet.EmojiMart.yml
-
 ## Other flatpaks with a similar tech stack
 
 * https://github.com/flathub/io.github.vemonet.EmojiMart
