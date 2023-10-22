@@ -59,8 +59,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/aichingm/lonewolf.git
-        tag: v1.0.4
-        commit: afff8b5254628e45822bbe46793cb3788f0ed574
+        tag: v1.1.0
+        commit: 9797c784ef2b21e90e92f64ea4c3d3d304ac7916
       - cargo-sources.json
       - node-sources.json
     build-commands:
