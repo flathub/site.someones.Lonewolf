@@ -60,21 +60,20 @@ modules:
       - type: git
         url: https://github.com/aichingm/lonewolf.git
         tag: v1.1.0
-        commit: 9797c784ef2b21e90e92f64ea4c3d3d304ac7916
+        commit: ae3bd8275229dc7e0ff6370806453b0307f911fe
+      - type: file
+        path: icons.ts
       - cargo-sources.json
       - node-sources.json
     build-commands:
       # install deps
       - (cd lonewolf-tauri; npm ci --no-audit --offline --cache=/run/build/lonewolf/flatpak-node/npm-cache)
       - (cd lonewolf-tauri; cargo --offline fetch --manifest-path src-tauri/Cargo.toml --verbose)
-      # build images
-      - (cd lonewolf-tauri; rsvg-convert -b "#ffffff00" src/assets/lonewolf.svg --width=512 --height=512 --output public/lonewolf.png)
-      - (cd lonewolf-tauri; rsvg-convert -b "#ffffff00" src/assets/icon.svg --width=128 --height=128 --output public/icon.png)
-      # build tauri images
-      - (cd lonewolf-tauri; mkdir -p src-tauri/icons)
-      - (cd lonewolf-tauri; rsvg-convert -b "#ffffff00" src/assets/icon.svg --width=512 --height=512 --output src-tauri/icons/512x512-lonewolf.png)
-      - (cd lonewolf-tauri; npm run tauri icon -- src-tauri/icons/512x512-lonewolf.png -o src-tauri/icons)
+      # copy icons
+      - mv icons.ts lonewolf/assets/
+      - (cd lonewolf; make check)
       # build
+      - (cd lonewolf-tauri; make src-tauri/icons/512x512-lonewolf.png public/lonewolf.png public/icon.png tauri-icons)
       - (cd lonewolf-tauri; npm run --offline tauri build -- -b deb)
       # install
       - install -Dm755 -t /app/bin/ lonewolf-tauri/src-tauri/target/release/bundle/deb/*/data/usr/bin/*
