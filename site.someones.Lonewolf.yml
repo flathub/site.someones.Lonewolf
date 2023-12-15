@@ -27,8 +27,8 @@ modules:
   - name: webkit2gtk-4.0
     sources:
       - type: archive
-        url: https://webkitgtk.org/releases/webkitgtk-2.40.5.tar.xz
-        sha256: 7de051a263668621d91a61a5eb1c3771d1a7cec900043d4afef06c326c16037f
+        url: https://webkitgtk.org/releases/webkitgtk-2.42.4.tar.xz
+        sha256: 52288b30bda22373442cecb86f9c9a569ad8d4769a1f97b352290ed92a67ed86
         x-checker-data:
           type: html
           url: https://webkitgtk.org/releases/
@@ -55,7 +55,7 @@ modules:
         npm_config_offline: 'true'
         npm_config_cache: /run/build/lonewolf/flatpak-node/npm-cache
         npm_config_nodedir: /usr/lib/sdk/node18
-        CYPRESS_INSTALL_BINARY: "0"
+        CYPRESS_INSTALL_BINARY: '0'
     sources:
       - type: git
         url: https://github.com/aichingm/lonewolf.git
@@ -68,12 +68,14 @@ modules:
     build-commands:
       # install deps
       - (cd lonewolf-tauri; npm ci --no-audit --offline --cache=/run/build/lonewolf/flatpak-node/npm-cache)
-      - (cd lonewolf-tauri; cargo --offline fetch --manifest-path src-tauri/Cargo.toml --verbose)
+      - (cd lonewolf-tauri; cargo --offline fetch --manifest-path src-tauri/Cargo.toml
+        --verbose)
       # copy icons
       - mv icons.ts lonewolf/assets/
       - (cd lonewolf; make check)
       # build
-      - (cd lonewolf-tauri; make src-tauri/icons/512x512-lonewolf.png public/lonewolf.png public/icon.png tauri-icons)
+      - (cd lonewolf-tauri; make src-tauri/icons/512x512-lonewolf.png public/lonewolf.png
+        public/icon.png tauri-icons)
       - (cd lonewolf-tauri; npm run --offline tauri build -- -b deb)
       # install
       - install -Dm755 -t /app/bin/ lonewolf-tauri/src-tauri/target/release/bundle/deb/*/data/usr/bin/*
