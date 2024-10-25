@@ -29,11 +29,6 @@ modules:
       - type: archive
         url: https://webkitgtk.org/releases/webkitgtk-2.40.5.tar.xz
         sha256: 7de051a263668621d91a61a5eb1c3771d1a7cec900043d4afef06c326c16037f
-        x-checker-data:
-          type: html
-          url: https://webkitgtk.org/releases/
-          version-pattern: LATEST-STABLE-(\d[\.\d]+\d)
-          url-template: https://webkitgtk.org/releases/webkitgtk-$version.tar.xz
     buildsystem: cmake-ninja
     #no-parallel-make: true
     config-opts:
