@@ -1,6 +1,6 @@
 app-id: site.someones.Lonewolf
 runtime: org.gnome.Platform
-runtime-version: '48'
+runtime-version: '50'
 sdk: org.gnome.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.node22
@@ -49,4 +49,3 @@ modules:
       - install -Dm644 -t /app/share/applications/ lonewolf-tauri/site.someones.Lonewolf.desktop
       - install -Dm644 -T lonewolf/assets/icon.svg /app/share/icons/hicolor/scalable/apps/site.someones.Lonewolf.svg
       - install -Dm644 -t /app/share/metainfo/ lonewolf-tauri/site.someones.Lonewolf.appdata.xml
-
